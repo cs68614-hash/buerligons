@@ -2,6 +2,39 @@
 
 A user-friendly interactive CAD application
 
+## 本地 OCCT 模式
+
+本 fork 保留原来的建模界面，使用本地 OpenCascade WASM 完成几何计算，运行不需要 ClassCAD key 或 ClassCAD 服务。
+
+```shell
+git clone https://github.com/cs68614-hash/buerligons.git
+cd buerligons
+yarn install --frozen-lockfile --ignore-engines
+yarn dev:occt
+```
+
+打开终端输出的本地网址。首次安装依赖需要网络，安装后由本地 HTTP 服务提供应用和 WASM，可在本机或内网运行。
+
+已接通基本草图与尺寸、拉伸和布尔、零件 STEP 交换、装配实例与基本配合、实时干涉和拖动防穿透。仍为功能原型，其他原生按钮的支持范围见文档。
+
+- [操作说明与验证记录](OCCT-PILOT.md)
+- [未完成事项与已知限制](OCCT-OPEN-ISSUES.md)
+- [在线机械设计平台规划](CLASSCAD-ECOSYSTEM-PLAN.md)
+- [带孔支架装配示例](examples/bracket-assembly.occt.json)
+- [快速拖动防穿透示例](examples/assembly-continuous-collision.occt.json)
+
+通过原生 File → open 打开示例，File → save → occt.json 保存可编辑模型。
+
+```shell
+yarn test:occt
+yarn build:occt
+yarn serve --host 127.0.0.1
+```
+
+## 原有 ClassCAD 模式
+
+以下是原项目的 ClassCAD 运行说明；本地 OCCT 模式使用上面的 `dev:occt`／`build:occt` 命令。
+
 First, clone the repository
 
 ```shell

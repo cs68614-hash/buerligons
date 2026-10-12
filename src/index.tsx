@@ -7,6 +7,7 @@ import { useRCadThemeMode, sessionClient, viewpoints } from '@buerli.io/react-ca
 import { App } from './App'
 import { initBuerli } from './initBuerli'
 import { Global } from './styles/Global'
+import { OcctClient } from './occt/OcctClient'
 
 // @ts-ignore
 const classcadWasmKey = CLASSCAD_WASM_KEY
@@ -16,6 +17,7 @@ const socketIoUrl = SOCKETIO_URL
 const wsClientUrl = WSCLIENT_URL
 
 initBuerli(id => {
+  if (import.meta.env.MODE === 'occt') return new OcctClient(id)
   // Drogon multi-client server: enables session sharing + the invite panel.
   // Without an ?invite= token this client is the host of a fresh session;
   // with one it joins the shared session as a guest.
@@ -32,7 +34,12 @@ initBuerli(id => {
   if (classcadWasmKey) {
     // In-page engine: sharing works through MCP bridge tokens (WASMClient.createInvite);
     // register it as the session client so the Session Management panel shows them.
-    const client = new WASMClient(id, { classcadKey: classcadWasmKey, app: 'buerligons' })
+    // ccpk_ values are account access tokens. WASMClient exchanges those for an
+    // engine key. A raw key still goes through classcadKey.
+    const wasmAuth = String(classcadWasmKey).startsWith('ccpk_')
+      ? { token: classcadWasmKey }
+      : { classcadKey: classcadWasmKey }
+    const client = new WASMClient(id, { ...wasmAuth, identity: { app: 'buerligons' } })
     sessionClient.setSessionClient(client)
     return client
   } else {

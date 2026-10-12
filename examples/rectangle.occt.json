@@ -1,0 +1,8 @@
+{
+  "format": "buerligons-occt",
+  "version": 1,
+  "units": "mm",
+  "name": "Rectangle sample",
+  "rectangle": { "x": 0, "y": 0, "width": 80, "height": 50 },
+  "extrusion": { "depth": 20 }
+}

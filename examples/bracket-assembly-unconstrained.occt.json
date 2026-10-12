@@ -1,0 +1,764 @@
+{
+  "format": "buerligons-occt",
+  "version": 1,
+  "units": "mm",
+  "name": "Bracket and locating pin",
+  "kind": "assembly",
+  "rectangle": null,
+  "extrusion": null,
+  "assembly": {
+    "parts": [
+      {
+        "id": 10001,
+        "document": {
+          "format": "buerligons-occt",
+          "version": 2,
+          "units": "mm",
+          "name": "Part",
+          "kind": "part",
+          "rectangle": null,
+          "extrusion": null,
+          "engineering": {
+            "documentId": "980bfde6-4b8a-499e-b273-60b115a75001",
+            "modelRevision": 0,
+            "baseVersionId": null,
+            "kernel": "OCCT-7.4.0p1",
+            "nextId": 762,
+            "features": [
+              {
+                "id": 20,
+                "uid": "ef0eefb1-e4af-46d1-923a-17a35863db0f",
+                "type": "sketch",
+                "name": "Sketch 1",
+                "opId": 21,
+                "dimensionSetId": 14,
+                "planeId": 104,
+                "points": [
+                  {
+                    "id": 700,
+                    "uid": "d5018e78-1918-4b09-aad0-57818998d190",
+                    "x": 0,
+                    "y": 0
+                  },
+                  {
+                    "id": 701,
+                    "uid": "c9a682f4-88d2-4dd5-92cb-eb14bd51f3f3",
+                    "x": 80,
+                    "y": 0
+                  },
+                  {
+                    "id": 704,
+                    "uid": "3057729e-78ac-413b-b280-73cb40057c10",
+                    "x": 80,
+                    "y": 0
+                  },
+                  {
+                    "id": 705,
+                    "uid": "ab1e1a93-fe27-41a0-a566-fafabe312198",
+                    "x": 80,
+                    "y": 15
+                  },
+                  {
+                    "id": 709,
+                    "uid": "7e408307-e670-49cd-a36e-ca2c6d7cf89a",
+                    "x": 80,
+                    "y": 15
+                  },
+                  {
+                    "id": 710,
+                    "uid": "b7e8cfed-1901-483c-b89a-55ca56694518",
+                    "x": 20,
+                    "y": 15
+                  },
+                  {
+                    "id": 714,
+                    "uid": "63dba4d8-6666-4250-b24d-cd6ac471e51a",
+                    "x": 20,
+                    "y": 15
+                  },
+                  {
+                    "id": 715,
+                    "uid": "ad3bc93a-bdb6-4e01-8020-841ac25f6f91",
+                    "x": 20,
+                    "y": 60
+                  },
+                  {
+                    "id": 719,
+                    "uid": "1f849b03-23bd-491d-ac94-d5e3201ee444",
+                    "x": 20,
+                    "y": 60
+                  },
+                  {
+                    "id": 720,
+                    "uid": "2dd5a780-36b4-4fce-ba2e-1b45cabe96cf",
+                    "x": 0,
+                    "y": 60
+                  },
+                  {
+                    "id": 724,
+                    "uid": "8a80f79b-d0d5-47da-9f68-7d63da364eb8",
+                    "x": 0,
+                    "y": 60
+                  },
+                  {
+                    "id": 725,
+                    "uid": "f32a9580-76ed-4b28-893a-357532e8999a",
+                    "x": 0,
+                    "y": 0
+                  }
+                ],
+                "entities": [
+                  {
+                    "id": 702,
+                    "uid": "10594725-846d-4b29-92e6-33f2914458d4",
+                    "type": "line",
+                    "start": 700,
+                    "end": 701,
+                    "construction": false
+                  },
+                  {
+                    "id": 706,
+                    "uid": "33174115-3fec-48df-92c7-8e3894292493",
+                    "type": "line",
+                    "start": 704,
+                    "end": 705,
+                    "construction": false
+                  },
+                  {
+                    "id": 711,
+                    "uid": "75ac5517-61a8-4a60-9c66-412dc2ac6511",
+                    "type": "line",
+                    "start": 709,
+                    "end": 710,
+                    "construction": false
+                  },
+                  {
+                    "id": 716,
+                    "uid": "b44fef88-a434-4aa8-9d5f-655fd44770cb",
+                    "type": "line",
+                    "start": 714,
+                    "end": 715,
+                    "construction": false
+                  },
+                  {
+                    "id": 721,
+                    "uid": "ca218ba3-5e5e-4f34-b2b4-fad258ea63cb",
+                    "type": "line",
+                    "start": 719,
+                    "end": 720,
+                    "construction": false
+                  },
+                  {
+                    "id": 726,
+                    "uid": "03f5252b-a118-4f83-8f09-417d91db6093",
+                    "type": "line",
+                    "start": 724,
+                    "end": 725,
+                    "construction": false
+                  }
+                ],
+                "constraints": [
+                  {
+                    "id": 703,
+                    "uid": "78f47319-3a0a-466e-9cb3-04b01e1a7eb3",
+                    "type": "HORIZONTAL",
+                    "entities": [
+                      702
+                    ],
+                    "name": "HORIZONTAL"
+                  },
+                  {
+                    "id": 707,
+                    "uid": "34e0c348-37de-4d08-9128-69f68f028b21",
+                    "type": "COINCIDENT",
+                    "entities": [
+                      704,
+                      701
+                    ],
+                    "name": "COINCIDENT"
+                  },
+                  {
+                    "id": 708,
+                    "uid": "b69e4722-f424-419b-a762-e9aef2819cb0",
+                    "type": "VERTICAL",
+                    "entities": [
+                      706
+                    ],
+                    "name": "VERTICAL"
+                  },
+                  {
+                    "id": 712,
+                    "uid": "f7d4756c-8bce-407d-b712-89d8738a511b",
+                    "type": "COINCIDENT",
+                    "entities": [
+                      709,
+                      705
+                    ],
+                    "name": "COINCIDENT"
+                  },
+                  {
+                    "id": 713,
+                    "uid": "6fa9b93b-168a-4189-9f6a-98b17e3cbdb2",
+                    "type": "HORIZONTAL",
+                    "entities": [
+                      711
+                    ],
+                    "name": "HORIZONTAL"
+                  },
+                  {
+                    "id": 717,
+                    "uid": "abda5a2e-a7c3-4242-8852-5dee8f23e93d",
+                    "type": "COINCIDENT",
+                    "entities": [
+                      714,
+                      710
+                    ],
+                    "name": "COINCIDENT"
+                  },
+                  {
+                    "id": 718,
+                    "uid": "0b24dd09-6156-476a-88b5-c5dffc16b916",
+                    "type": "VERTICAL",
+                    "entities": [
+                      716
+                    ],
+                    "name": "VERTICAL"
+                  },
+                  {
+                    "id": 722,
+                    "uid": "24429426-0860-4b96-9bdd-c4df9e944b21",
+                    "type": "COINCIDENT",
+                    "entities": [
+                      719,
+                      715
+                    ],
+                    "name": "COINCIDENT"
+                  },
+                  {
+                    "id": 723,
+                    "uid": "7eb2073d-f2d9-46ba-bcae-608472eb2527",
+                    "type": "HORIZONTAL",
+                    "entities": [
+                      721
+                    ],
+                    "name": "HORIZONTAL"
+                  },
+                  {
+                    "id": 727,
+                    "uid": "b48f4983-82cd-46b7-b015-09c05be7dc1b",
+                    "type": "COINCIDENT",
+                    "entities": [
+                      724,
+                      720
+                    ],
+                    "name": "COINCIDENT"
+                  },
+                  {
+                    "id": 728,
+                    "uid": "2bf0d41c-32c5-48e0-aa46-af558d172737",
+                    "type": "COINCIDENT",
+                    "entities": [
+                      725,
+                      700
+                    ],
+                    "name": "COINCIDENT"
+                  },
+                  {
+                    "id": 729,
+                    "uid": "d1ea8566-aca1-4475-a917-4f02311c4f09",
+                    "type": "VERTICAL",
+                    "entities": [
+                      726
+                    ],
+                    "name": "VERTICAL"
+                  },
+                  {
+                    "id": 731,
+                    "uid": "57ffef6e-f70c-404e-b8f5-146268ccbdb8",
+                    "type": "FIXATION",
+                    "entities": [
+                      700
+                    ],
+                    "name": "FIXATION",
+                    "fixed": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "id": 732,
+                    "uid": "6988d992-fe31-4afd-baa6-c321a818afa1",
+                    "type": "HORIZONTAL_DISTANCE",
+                    "entities": [
+                      702
+                    ],
+                    "name": "Width",
+                    "value": 80,
+                    "dimensionId": 733
+                  },
+                  {
+                    "id": 734,
+                    "uid": "1197e092-a939-42b4-a976-267dc11f3183",
+                    "type": "VERTICAL_DISTANCE",
+                    "entities": [
+                      706
+                    ],
+                    "name": "Leg",
+                    "value": 15,
+                    "dimensionId": 735
+                  },
+                  {
+                    "id": 736,
+                    "uid": "7f6d249e-513f-446b-84be-73fce4410c6a",
+                    "type": "HORIZONTAL_DISTANCE",
+                    "entities": [
+                      721
+                    ],
+                    "name": "Upright",
+                    "value": 20,
+                    "dimensionId": 737
+                  },
+                  {
+                    "id": 738,
+                    "uid": "a55556f8-4573-48fb-bab6-02c599c72328",
+                    "type": "VERTICAL_DISTANCE",
+                    "entities": [
+                      726
+                    ],
+                    "name": "Height",
+                    "value": 60,
+                    "dimensionId": 739
+                  }
+                ],
+                "regions": [
+                  {
+                    "id": 730,
+                    "uid": "d2e2af7a-a26c-4c53-a1c1-fd73420f7c3b",
+                    "name": "Region 1",
+                    "curves": [
+                      702,
+                      706,
+                      711,
+                      716,
+                      721,
+                      726
+                    ]
+                  }
+                ],
+                "dof": 0,
+                "residual": 0
+              },
+              {
+                "id": 30,
+                "uid": "e2627bc7-4672-4f39-8492-512f61e99bf9",
+                "type": "extrusion",
+                "name": "Bracket base",
+                "opId": 31,
+                "bodyId": 1000,
+                "regionId": 32,
+                "sketchId": 20,
+                "references": [
+                  730
+                ],
+                "depth": 20,
+                "direction": "UP"
+              },
+              {
+                "id": 740,
+                "uid": "493095fa-8c0d-43b9-a789-041d295a0a03",
+                "type": "sketch",
+                "name": "Sketch 2",
+                "opId": 741,
+                "dimensionSetId": 742,
+                "planeId": 104,
+                "points": [
+                  {
+                    "id": 743,
+                    "uid": "f89202bb-02db-4e00-bded-88bf724ec96b",
+                    "x": 50,
+                    "y": 7.5
+                  },
+                  {
+                    "id": 749,
+                    "uid": "17f57608-5b9e-4553-ad13-fc1225ff450a",
+                    "x": 10,
+                    "y": 40
+                  }
+                ],
+                "entities": [
+                  {
+                    "id": 744,
+                    "uid": "22162188-f4a9-4768-9fcb-e60286873ca4",
+                    "type": "circle",
+                    "center": 743,
+                    "radius": 3,
+                    "construction": false
+                  },
+                  {
+                    "id": 750,
+                    "uid": "9fb82ef8-1c65-42bc-b12e-f27019ee9746",
+                    "type": "circle",
+                    "center": 749,
+                    "radius": 3,
+                    "construction": false
+                  }
+                ],
+                "constraints": [
+                  {
+                    "id": 745,
+                    "uid": "8cbe146b-4570-4159-8181-0a81ce079294",
+                    "type": "DIAMETER",
+                    "entities": [
+                      744
+                    ],
+                    "name": "Diameter",
+                    "value": 6,
+                    "dimensionId": 746,
+                    "position": [
+                      63,
+                      17.5,
+                      0
+                    ]
+                  },
+                  {
+                    "id": 748,
+                    "uid": "54dc26fe-0508-4acf-8ff6-a8266890ef1d",
+                    "type": "FIXATION",
+                    "entities": [
+                      743
+                    ],
+                    "name": "FIXATION",
+                    "fixed": [
+                      50,
+                      7.5
+                    ]
+                  },
+                  {
+                    "id": 751,
+                    "uid": "5c693659-bbcc-40eb-a36e-00b2a5d35fe3",
+                    "type": "DIAMETER",
+                    "entities": [
+                      750
+                    ],
+                    "name": "Diameter",
+                    "value": 6,
+                    "dimensionId": 752,
+                    "position": [
+                      23,
+                      50,
+                      0
+                    ]
+                  },
+                  {
+                    "id": 754,
+                    "uid": "7c94a661-d002-452d-8a0f-93fe889d0e85",
+                    "type": "FIXATION",
+                    "entities": [
+                      749
+                    ],
+                    "name": "FIXATION",
+                    "fixed": [
+                      10,
+                      40
+                    ]
+                  }
+                ],
+                "regions": [
+                  {
+                    "id": 747,
+                    "uid": "1b1cc8cb-f01d-4948-8cf8-d9ea999e1798",
+                    "name": "Region 1",
+                    "curves": [
+                      744
+                    ]
+                  },
+                  {
+                    "id": 753,
+                    "uid": "8f7acbd0-7de2-4bf1-bfc4-738a057e1b10",
+                    "name": "Region 2",
+                    "curves": [
+                      750
+                    ]
+                  }
+                ],
+                "dof": 0,
+                "residual": 0
+              },
+              {
+                "id": 755,
+                "uid": "9aee3c04-3abf-4f7e-b39b-07697dc22d48",
+                "type": "extrusion",
+                "name": "Hole tool",
+                "opId": 756,
+                "bodyId": 757,
+                "regionId": 758,
+                "sketchId": 740,
+                "references": [
+                  744,
+                  750
+                ],
+                "depth": 20,
+                "direction": "UP"
+              },
+              {
+                "id": 759,
+                "uid": "71647ace-7cf2-497e-a31b-8c9dc86843fc",
+                "type": "boolean",
+                "name": "Mounting holes",
+                "opId": 760,
+                "bodyId": 761,
+                "operation": "SUBTRACTION",
+                "target": 30,
+                "tools": [
+                  755
+                ],
+                "draft": false
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 20001,
+        "document": {
+          "format": "buerligons-occt",
+          "version": 2,
+          "units": "mm",
+          "name": "Locating pin",
+          "kind": "part",
+          "rectangle": null,
+          "extrusion": null,
+          "engineering": {
+            "documentId": "95f6b975-91af-40bc-a886-a5b33cb04440",
+            "modelRevision": 0,
+            "baseVersionId": null,
+            "kernel": "OCCT-7.4.0p1",
+            "nextId": 720,
+            "features": [
+              {
+                "id": 20,
+                "uid": "92c43829-6d79-4ad8-8bf2-fdc8c96df559",
+                "type": "sketch",
+                "name": "Sketch 1",
+                "opId": 21,
+                "dimensionSetId": 14,
+                "planeId": 104,
+                "points": [
+                  {
+                    "id": 700,
+                    "uid": "14f9961e-843e-4358-a960-475b39633e67",
+                    "x": 0,
+                    "y": 0
+                  }
+                ],
+                "entities": [
+                  {
+                    "id": 701,
+                    "uid": "d6ca060d-e99b-4e48-b8ca-09bee82f53ac",
+                    "type": "circle",
+                    "center": 700,
+                    "radius": 3,
+                    "construction": false
+                  }
+                ],
+                "constraints": [
+                  {
+                    "id": 702,
+                    "uid": "abbc4901-5177-41ee-a5f5-91e155ba328e",
+                    "type": "DIAMETER",
+                    "entities": [
+                      701
+                    ],
+                    "name": "Diameter",
+                    "value": 6,
+                    "dimensionId": 703,
+                    "position": [
+                      13,
+                      10,
+                      0
+                    ]
+                  }
+                ],
+                "regions": [
+                  {
+                    "id": 704,
+                    "uid": "ab86519a-0626-4d46-9036-48c972c881e3",
+                    "name": "Region 1",
+                    "curves": [
+                      701
+                    ]
+                  }
+                ],
+                "dof": 2,
+                "residual": 0
+              },
+              {
+                "id": 30,
+                "uid": "ebaefe13-a911-4741-9e28-03626b7c058b",
+                "type": "extrusion",
+                "name": "Pin shaft",
+                "opId": 31,
+                "bodyId": 1000,
+                "regionId": 32,
+                "sketchId": 20,
+                "references": [
+                  701
+                ],
+                "depth": 20,
+                "direction": "DOWN",
+                "draft": false
+              },
+              {
+                "id": 705,
+                "uid": "337bb63d-17a9-4537-867d-a53023d0085a",
+                "type": "sketch",
+                "name": "Sketch 2",
+                "opId": 706,
+                "dimensionSetId": 707,
+                "planeId": 104,
+                "points": [
+                  {
+                    "id": 708,
+                    "uid": "3e2585d0-31f6-4332-8d25-43996497fd71",
+                    "x": 0,
+                    "y": 0
+                  }
+                ],
+                "entities": [
+                  {
+                    "id": 709,
+                    "uid": "daacd061-efa7-4b98-ab54-7efd83ed52a9",
+                    "type": "circle",
+                    "center": 708,
+                    "radius": 6,
+                    "construction": false
+                  }
+                ],
+                "constraints": [
+                  {
+                    "id": 710,
+                    "uid": "9cdaaf16-1ced-4e71-882e-6251f8062a85",
+                    "type": "DIAMETER",
+                    "entities": [
+                      709
+                    ],
+                    "name": "Diameter",
+                    "value": 12,
+                    "dimensionId": 711,
+                    "position": [
+                      16,
+                      10,
+                      0
+                    ]
+                  }
+                ],
+                "regions": [
+                  {
+                    "id": 712,
+                    "uid": "5bf4851d-bc41-4134-89c3-602b5cd8d4cc",
+                    "name": "Region 1",
+                    "curves": [
+                      709
+                    ]
+                  }
+                ],
+                "dof": 2,
+                "residual": 0
+              },
+              {
+                "id": 713,
+                "uid": "c2a84139-20cd-48e0-b751-8b6a791432d0",
+                "type": "extrusion",
+                "name": "Pin head",
+                "opId": 714,
+                "bodyId": 715,
+                "regionId": 716,
+                "sketchId": 705,
+                "references": [
+                  709
+                ],
+                "depth": 4,
+                "direction": "UP",
+                "draft": false
+              },
+              {
+                "id": 717,
+                "uid": "9273a66c-b807-4b33-bd0d-fe0b51b5b9be",
+                "type": "boolean",
+                "name": "Headed pin",
+                "opId": 718,
+                "bodyId": 719,
+                "operation": "UNION",
+                "target": 30,
+                "tools": [
+                  713
+                ],
+                "draft": false
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "instances": [
+      {
+        "id": 1000001,
+        "productId": 10001,
+        "name": "Part 1",
+        "csys": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": 1000002,
+        "productId": 20001,
+        "name": "Locating pin 1",
+        "csys": [
+          [
+            110,
+            70,
+            40
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ]
+      }
+    ],
+    "constraints": [],
+    "nextPart": 3,
+    "nextInstance": 3,
+    "nextConstraint": 1
+  }
+}

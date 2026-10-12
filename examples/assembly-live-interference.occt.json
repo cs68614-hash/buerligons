@@ -1,0 +1,152 @@
+{
+  "format": "buerligons-occt",
+  "version": 1,
+  "units": "mm",
+  "name": "Realtime slider collision demo",
+  "kind": "assembly",
+  "rectangle": null,
+  "extrusion": null,
+  "assembly": {
+    "parts": [
+      {
+        "id": 10001,
+        "document": {
+          "format": "buerligons-occt",
+          "version": 1,
+          "units": "mm",
+          "name": "Rectangle sample",
+          "kind": "part",
+          "sketch": {
+            "planeId": 104
+          },
+          "rectangle": {
+            "x": 0,
+            "y": 0,
+            "width": 10,
+            "height": 10
+          },
+          "extrusion": {
+            "depth": 10
+          }
+        }
+      }
+    ],
+    "instances": [
+      {
+        "id": 1000001,
+        "productId": 10001,
+        "name": "Fixed block",
+        "csys": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": 1000002,
+        "productId": 10001,
+        "name": "Sliding block",
+        "csys": [
+          [
+            0,
+            0,
+            15
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ]
+      }
+    ],
+    "constraints": [
+      {
+        "id": 2000001,
+        "name": "Fastened Origin",
+        "type": "FastenedOrigin",
+        "draft": false,
+        "mate1": {
+          "path": [
+            1000001
+          ],
+          "csys": 10100,
+          "flip": "Z",
+          "reorient": "0"
+        },
+        "mate2": null,
+        "values": {
+          "xOffset": 0,
+          "yOffset": 0,
+          "zOffset": 0,
+          "xRotation": 0,
+          "yRotation": 0,
+          "zRotation": 0
+        },
+        "limits": {}
+      },
+      {
+        "id": 2000002,
+        "name": "Slider",
+        "type": "Slider",
+        "draft": false,
+        "mate1": {
+          "path": [
+            1000001
+          ],
+          "csys": 10100,
+          "flip": "Z",
+          "reorient": "0"
+        },
+        "mate2": {
+          "path": [
+            1000002
+          ],
+          "csys": 10100,
+          "flip": "Z",
+          "reorient": "0"
+        },
+        "values": {
+          "xOffset": 0,
+          "yOffset": 0
+        },
+        "limits": {
+          "zOffsetLimits": {
+            "min": 0,
+            "max": 20
+          }
+        }
+      }
+    ],
+    "nextPart": 2,
+    "nextInstance": 3,
+    "nextConstraint": 3
+  }
+}

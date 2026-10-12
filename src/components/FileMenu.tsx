@@ -12,11 +12,15 @@ import { createApi, BuerliCadFacade } from '@buerli.io/classcad'
 import { api as buerliApi, DrawingID, getDrawing } from '@buerli.io/core'
 import { useDrawing } from '@buerli.io/react'
 import { Menu, MenuItems, Readfile, sessionClient } from '@buerli.io/react-cad'
-import { Button, Space, Tooltip, Typography, Dropdown, MenuProps } from 'antd'
+import { Button, Space, Tooltip, Typography, Dropdown, MenuProps, message } from 'antd'
 import 'antd/dist/antd.css'
 import React from 'react'
 
 import './FileMenu.css'
+import { OcctReadfile } from '../occt/OcctReadfile'
+import { useOcct } from '../occt/OcctClient'
+import { serializeDocument } from '../occt/model'
+const isOcct = import.meta.env.MODE === 'occt'
 
 type States = {
   current: number
@@ -35,7 +39,7 @@ type Command = {
 type MenuItem = Required<MenuProps>['items'][number]
 
 function useMenuItems(drawingId: DrawingID): MenuItems {
-  const rfRef = React.useRef<HTMLInputElement>()
+  const rfRef = React.useRef<HTMLInputElement>(null)
 
   const createNewDrawing = React.useCallback(
     (type: 'Part' | 'Assembly') => {
@@ -59,7 +63,7 @@ function useMenuItems(drawingId: DrawingID): MenuItems {
             buerliApi.getState().api.removeDrawing(oldDrawingId)
           }
         } catch (error) {
-          console.error(error)
+          message.error(error instanceof Error ? error.message : String(error))
         }
       }
       run()
@@ -68,7 +72,7 @@ function useMenuItems(drawingId: DrawingID): MenuItems {
   )
 
   const save = React.useCallback(
-    (type: 'ofb' | 'stp' | 'stl') => {
+    (type: 'ofb' | 'stp' | 'stl' | 'occt.json') => {
       const run = async () => {
         try {
           const drawing = getDrawing(drawingId)
@@ -76,12 +80,27 @@ function useMenuItems(drawingId: DrawingID): MenuItems {
           const ptIndex = name.lastIndexOf('.')
           name = name.substring(0, ptIndex >= 0 ? ptIndex : name.length)
 
+          if (type === 'occt.json') {
+            const client = useOcct.getState().client
+            if (!client) return
+            const model = await client.getDocumentForSave()
+            const url = URL.createObjectURL(new Blob([serializeDocument(model)], { type: 'application/json' }))
+            const link = document.createElement('a')
+            link.href = url
+            link.download = `${model.name}.occt.json`
+            link.click()
+            setTimeout(() => URL.revokeObjectURL(url), 1000)
+            return
+          }
+
           const res = await createApi(drawingId).v1.common.save({
             format: type.toUpperCase() as 'OFB' | 'STP' | 'STL',
             encoding: 'base64',
           })
 
           const content = res?.result?.content
+          if (res?.maxLevel && res.maxLevel >= 50)
+            throw new Error((res.messages || []).map(m => m.message).join('\n') || '导出失败。')
           if (content) {
             // Blob() UTF-8-encodes strings, which corrupts binary formats (STL/OFB); pass raw bytes instead.
             const data = Uint8Array.from(atob(content), c => c.charCodeAt(0))
@@ -89,9 +108,10 @@ function useMenuItems(drawingId: DrawingID): MenuItems {
             link.href = window.URL.createObjectURL(new Blob([data], { type: 'application/octet-stream' }))
             link.download = `${name}.${type}`
             link.click()
+            setTimeout(() => URL.revokeObjectURL(link.href), 1000)
           }
         } catch (error) {
-          console.error(error)
+          message.error(error instanceof Error ? error.message : String(error))
         }
       }
       run()
@@ -99,7 +119,7 @@ function useMenuItems(drawingId: DrawingID): MenuItems {
     [drawingId],
   )
 
-  return React.useMemo(() => {
+  return React.useMemo<MenuItems>(() => {
     return {
       new: {
         caption: 'new',
@@ -121,7 +141,7 @@ function useMenuItems(drawingId: DrawingID): MenuItems {
         caption: (
           <>
             open
-            <Readfile ref={rfRef} singleDrawingApp />
+            {isOcct ? <OcctReadfile ref={rfRef} /> : <Readfile ref={rfRef} singleDrawingApp />}
           </>
         ),
         icon: <FolderOpenOutlined />,
@@ -130,20 +150,25 @@ function useMenuItems(drawingId: DrawingID): MenuItems {
       save: {
         caption: 'save',
         icon: <SaveOutlined />,
-        children: {
-          ofb: {
-            caption: 'ofb',
-            callback: () => save('ofb'),
-          },
-          stp: {
-            caption: 'stp',
-            callback: () => save('stp'),
-          },
-          stl: {
-            caption: 'stl',
-            callback: () => save('stl'),
-          },
-        },
+        children: isOcct
+          ? ({
+              json: { caption: 'occt.json', callback: () => save('occt.json') },
+              stp: { caption: 'stp', callback: () => save('stp') },
+            } as Record<string, { caption: string; callback: () => void }>)
+          : {
+              ofb: {
+                caption: 'ofb',
+                callback: () => save('ofb'),
+              },
+              stp: {
+                caption: 'stp',
+                callback: () => save('stp'),
+              },
+              stl: {
+                caption: 'stl',
+                callback: () => save('stl'),
+              },
+            },
       },
     }
   }, [createNewDrawing, save])

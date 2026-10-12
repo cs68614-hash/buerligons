@@ -1,0 +1,178 @@
+{
+  "format": "buerligons-occt",
+  "version": 2,
+  "units": "mm",
+  "name": "Locating pin",
+  "kind": "part",
+  "rectangle": null,
+  "extrusion": null,
+  "engineering": {
+    "documentId": "95f6b975-91af-40bc-a886-a5b33cb04440",
+    "modelRevision": 0,
+    "baseVersionId": null,
+    "kernel": "OCCT-7.4.0p1",
+    "nextId": 720,
+    "features": [
+      {
+        "id": 20,
+        "uid": "92c43829-6d79-4ad8-8bf2-fdc8c96df559",
+        "type": "sketch",
+        "name": "Sketch 1",
+        "opId": 21,
+        "dimensionSetId": 14,
+        "planeId": 104,
+        "points": [
+          {
+            "id": 700,
+            "uid": "14f9961e-843e-4358-a960-475b39633e67",
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "entities": [
+          {
+            "id": 701,
+            "uid": "d6ca060d-e99b-4e48-b8ca-09bee82f53ac",
+            "type": "circle",
+            "center": 700,
+            "radius": 3,
+            "construction": false
+          }
+        ],
+        "constraints": [
+          {
+            "id": 702,
+            "uid": "abbc4901-5177-41ee-a5f5-91e155ba328e",
+            "type": "DIAMETER",
+            "entities": [
+              701
+            ],
+            "name": "Diameter",
+            "value": 6,
+            "dimensionId": 703,
+            "position": [
+              13,
+              10,
+              0
+            ]
+          }
+        ],
+        "regions": [
+          {
+            "id": 704,
+            "uid": "ab86519a-0626-4d46-9036-48c972c881e3",
+            "name": "Region 1",
+            "curves": [
+              701
+            ]
+          }
+        ],
+        "dof": 2,
+        "residual": 0
+      },
+      {
+        "id": 30,
+        "uid": "ebaefe13-a911-4741-9e28-03626b7c058b",
+        "type": "extrusion",
+        "name": "Pin shaft",
+        "opId": 31,
+        "bodyId": 1000,
+        "regionId": 32,
+        "sketchId": 20,
+        "references": [
+          701
+        ],
+        "depth": 20,
+        "direction": "DOWN",
+        "draft": false
+      },
+      {
+        "id": 705,
+        "uid": "337bb63d-17a9-4537-867d-a53023d0085a",
+        "type": "sketch",
+        "name": "Sketch 2",
+        "opId": 706,
+        "dimensionSetId": 707,
+        "planeId": 104,
+        "points": [
+          {
+            "id": 708,
+            "uid": "3e2585d0-31f6-4332-8d25-43996497fd71",
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "entities": [
+          {
+            "id": 709,
+            "uid": "daacd061-efa7-4b98-ab54-7efd83ed52a9",
+            "type": "circle",
+            "center": 708,
+            "radius": 6,
+            "construction": false
+          }
+        ],
+        "constraints": [
+          {
+            "id": 710,
+            "uid": "9cdaaf16-1ced-4e71-882e-6251f8062a85",
+            "type": "DIAMETER",
+            "entities": [
+              709
+            ],
+            "name": "Diameter",
+            "value": 12,
+            "dimensionId": 711,
+            "position": [
+              16,
+              10,
+              0
+            ]
+          }
+        ],
+        "regions": [
+          {
+            "id": 712,
+            "uid": "5bf4851d-bc41-4134-89c3-602b5cd8d4cc",
+            "name": "Region 1",
+            "curves": [
+              709
+            ]
+          }
+        ],
+        "dof": 2,
+        "residual": 0
+      },
+      {
+        "id": 713,
+        "uid": "c2a84139-20cd-48e0-b751-8b6a791432d0",
+        "type": "extrusion",
+        "name": "Pin head",
+        "opId": 714,
+        "bodyId": 715,
+        "regionId": 716,
+        "sketchId": 705,
+        "references": [
+          709
+        ],
+        "depth": 4,
+        "direction": "UP",
+        "draft": false
+      },
+      {
+        "id": 717,
+        "uid": "9273a66c-b807-4b33-bd0d-fe0b51b5b9be",
+        "type": "boolean",
+        "name": "Headed pin",
+        "opId": 718,
+        "bodyId": 719,
+        "operation": "UNION",
+        "target": 30,
+        "tools": [
+          713
+        ],
+        "draft": false
+      }
+    ]
+  }
+}

@@ -6,6 +6,7 @@ import 'antd/dist/antd.css'
 import React from 'react'
 import styled from 'styled-components'
 
+import { OcctReadfile } from '../occt/OcctReadfile'
 import { SimpleMessage } from './SimpleMessage'
 
 const welcomeColors = {
@@ -26,7 +27,7 @@ const welcomeColors = {
 }
 
 export const WelcomePage: React.FC = () => {
-  const rfRef = React.useRef<HTMLInputElement>()
+  const rfRef = React.useRef<HTMLInputElement>(null)
   const mode = useRCadThemeMode()
   const colors = welcomeColors[mode]
 
@@ -36,9 +37,8 @@ export const WelcomePage: React.FC = () => {
   }, [])
 
   const createAssembly = React.useCallback(async () => {
-    const newDrawingId = await BuerliCadFacade.utils.connect()
-    newDrawingId &&
-      (await createApi(newDrawingId).v1.assembly.create({ name: 'Assembly' }).catch(console.info))
+    const newDrawingId = await BuerliCadFacade.utils.connect('Assembly')
+    newDrawingId && (await createApi(newDrawingId).v1.assembly.create({ name: 'Assembly' }).catch(console.info))
   }, [])
 
   const openFile = React.useCallback(() => {
@@ -75,7 +75,11 @@ export const WelcomePage: React.FC = () => {
           />
         </Tooltip>
       </ThemeToggleWrap>
-      <Main $dotLight={colors.dotLight} $dotDark={colors.dotDark} $gradientInner={colors.gradientInner} $gradientOuter={colors.gradientOuter}>
+      <Main
+        $dotLight={colors.dotLight}
+        $dotDark={colors.dotDark}
+        $gradientInner={colors.gradientInner}
+        $gradientOuter={colors.gradientOuter}>
         <Dropdown menu={menuProps}>
           <WideButton type="primary">
             <Space>Create New ...</Space>
@@ -87,7 +91,7 @@ export const WelcomePage: React.FC = () => {
         <MessageSpace>
           <SimpleMessage />
         </MessageSpace>
-        <Readfile ref={rfRef} singleDrawingApp />
+        {import.meta.env.MODE === 'occt' ? <OcctReadfile ref={rfRef} /> : <Readfile ref={rfRef} singleDrawingApp />}
       </Main>
     </>
   )
@@ -143,8 +147,7 @@ const Main = styled.div<{ $dotLight: string; $dotDark: string; $gradientInner: s
   align-content: center;
   gap: 16px;
 
-  background:
-    radial-gradient(
+  background: radial-gradient(
       circle at center,
       ${p => p.$dotLight},
       rgba(255, 255, 255, 0) 20%,

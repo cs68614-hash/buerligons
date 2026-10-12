@@ -8,10 +8,7 @@ import { HUD } from '@buerli.io/react-cad'
 import { PivotControls } from '@react-three/drei'
 
 import { findInteractableParent } from './utils'
-
-// Artificial delay in 16 ms.
-const artifDelay = 16
-let promise: Promise<any> | null
+import { DragSequence } from './DragSequence'
 
 export const Gizmo: React.FC<{ drawingId: DrawingID; productId: ObjectID; matrix: THREE.Matrix4 }> = ({
   drawingId,
@@ -19,7 +16,8 @@ export const Gizmo: React.FC<{ drawingId: DrawingID; productId: ObjectID; matrix
   matrix,
 }) => {
   const dragInfo = React.useRef<{ mPInv: THREE.Matrix4; mL0CInv: THREE.Matrix4 } | null>(null)
-  const mdL = React.useRef<THREE.Matrix4 | null>(null)
+  const sequence = React.useRef<DragSequence<THREE.Matrix4>>()
+  const finished = React.useRef<Promise<void>>(Promise.resolve())
   const isBlocked = React.useRef<boolean>(false)
 
   const { position, rotation } = React.useMemo(() => {
@@ -63,40 +61,29 @@ export const Gizmo: React.FC<{ drawingId: DrawingID; productId: ObjectID; matrix
       )
 
       dragInfo.current = { mPInv, mL0CInv }
-      createApi(drawingId).v1.assembly.startMovingUnderConstraints({
-        id: curProdId,
-        instanceIds: draggedInstances,
-        pivotInfo: pivotPos,
-        mucType,
-      })
+      const api = createApi(drawingId).v1.assembly
+      const started = finished.current.then(() =>
+        api.startMovingUnderConstraints({
+          id: curProdId,
+          instanceIds: draggedInstances,
+          pivotInfo: pivotPos,
+          mucType,
+        }),
+      )
+      sequence.current = new DragSequence(
+        started,
+        async delta => {
+          const e = delta.elements
+          await api.moveUnderConstraints({
+            id: curProdId,
+            rotation: { xDir: e.slice(0, 3), yDir: e.slice(4, 7), zDir: e.slice(8, 11) },
+            offset: e.slice(12, 15),
+          })
+        },
+        () => api.finishMovingUnderConstraints({ id: curProdId }),
+      )
     },
     [drawingId, productId, position],
-  )
-
-  const transformInstances = React.useCallback(
-    async (mdL_: THREE.Matrix4) => {
-      const curProdId = getDrawing(drawingId).structure.currentProduct || -1
-
-      const rot = {
-        xDir: [mdL_.elements[0], mdL_.elements[1], mdL_.elements[2]],
-        yDir: [mdL_.elements[4], mdL_.elements[5], mdL_.elements[6]],
-        zDir: [mdL_.elements[8], mdL_.elements[9], mdL_.elements[10]],
-      }
-      const offset = [mdL_.elements[12], mdL_.elements[13], mdL_.elements[14]]
-
-      promise = createApi(drawingId).v1.assembly.moveUnderConstraints({ id: curProdId, rotation: rot, offset }).catch(console.warn)
-      await promise
-
-      // Artificial slowdown to lessen network/server burden
-      await new Promise(resolve => setTimeout(resolve, artifDelay))
-      promise = null
-
-      if (mdL.current) {
-        transformInstances(mdL.current.clone())
-        mdL.current = null
-      }
-    },
-    [drawingId],
   )
 
   const onDrag = React.useCallback(
@@ -105,15 +92,10 @@ export const Gizmo: React.FC<{ drawingId: DrawingID; productId: ObjectID; matrix
         return
       }
 
-      const mdL_ = dragInfo.current.mPInv.clone().multiply(w).multiply(dragInfo.current.mL0CInv)
-
-      if (promise) {
-        mdL.current = mdL_
-      } else {
-        transformInstances(mdL_)
-      }
+      const delta = dragInfo.current.mPInv.clone().multiply(w).multiply(dragInfo.current.mL0CInv)
+      sequence.current?.update(delta)
     },
-    [transformInstances],
+    [],
   )
 
   const onDragEnd = React.useCallback(() => {
@@ -122,10 +104,8 @@ export const Gizmo: React.FC<{ drawingId: DrawingID; productId: ObjectID; matrix
     }
 
     dragInfo.current = null
-    mdL.current = null
-    const curProdId = getDrawing(drawingId).structure.currentProduct || -1
-    createApi(drawingId).v1.assembly.finishMovingUnderConstraints({ id: curProdId })
-  }, [drawingId])
+    finished.current = sequence.current!.finish().catch(console.warn)
+  }, [])
 
   React.useEffect(() => {
     const handleKey = (e: KeyboardEvent) => (isBlocked.current = e.shiftKey)
@@ -136,6 +116,7 @@ export const Gizmo: React.FC<{ drawingId: DrawingID; productId: ObjectID; matrix
     return () => {
       window.removeEventListener('keydown', handleKey)
       window.removeEventListener('keyup', handleKey)
+      void sequence.current?.finish().catch(console.warn)
     }
   }, [])
 

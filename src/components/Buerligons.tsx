@@ -39,6 +39,8 @@ import {
   SharedViewpointBounds,
 } from './canvas/SharedViewpoints'
 import { ViewCube } from './canvas/ViewCube'
+import { InterferenceTool } from '../occt/InterferenceTool'
+import { InterferenceHighlight } from '../occt/InterferenceHighlight'
 
 const CAMERA = { position: [0, 0, 10], zoom: 50 } as ReactThreeFiber.CameraProps &
   ReactThreeFiber.PerspectiveCameraProps &
@@ -115,7 +117,13 @@ export const App: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
     <>
       <PluginManager />
-      <Drawing drawingId={drawingId} readOnly={readOnly} Menu={<FileMenu drawingId={drawingId} />}>
+      <Drawing
+        drawingId={drawingId}
+        readOnly={readOnly}
+        Status={import.meta.env.MODE === 'occt' ? 'OCCT · local' : undefined}
+        Menu={<FileMenu drawingId={drawingId} />}
+        Trail={import.meta.env.MODE === 'occt' ? <InterferenceTool drawingId={drawingId} /> : undefined}
+      >
         <CanvasImpl drawingId={drawingId}>
           <Controls makeDefault staticMoving rotateSpeed={2} />
           <Lights drawingId={drawingId} />
@@ -135,6 +143,7 @@ export const App: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
             <PluginGeometryBounds drawingId={drawingId} />
             <ContextMenu drawingId={drawingId} />
             <ViewCube />
+            {import.meta.env.MODE === 'occt' && <InterferenceHighlight />}
           </Fit>
           <BuerliPluginsGeometry drawingId={drawingId} />
           <GlobalCSysDisplay drawingId={drawingId} />
